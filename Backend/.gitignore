@@ -1,0 +1,59 @@
+# Build output
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+publish/
+artifacts/
+
+# .NET generated files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+*.nupkg
+*.snupkg
+project.lock.json
+project.assets.json
+*.nuget.props
+*.nuget.targets
+
+# Visual Studio
+.vs/
+TestResults/
+*.VisualState.xml
+
+# JetBrains Rider
+.idea/
+*.sln.DotSettings.user
+
+# Logs and diagnostics
+*.log
+logs/
+
+# Local databases
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local environment files
+.env
+.env.*
+*.local
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo

@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LoginPage from "./features/auth/Login/LoginPage";
+import LoginPage from "./features/auth/Login/LoginPageModern";
 import ProtectedRoute from "./ProtectedRoute";
 import TerminalPage from "./features/terminals/TerminalPage";
 

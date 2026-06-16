@@ -65,7 +65,7 @@ const columns: TableProps<DataType>['columns'] = [
         title: 'Action',
         key: 'action',
         render: (_, record) => (
-            <Space size="medium">
+            <Space size="middle">
                 <a>Edit {record.name}</a>
                 <a>Delete</a>
             </Space>

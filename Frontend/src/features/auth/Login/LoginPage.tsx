@@ -1,5 +1,5 @@
 ﻿import type { FormProps } from "antd";
-import { Button, Checkbox, Form, Input, message } from "antd";
+import { Button, Form, Input, message } from "antd";
 import axios from "axios";
 import "./LoginPage.css";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,6 @@ import { saveToken } from "../Auth.ts";
 type LoginRequest = {
     email: string;
     password: string;
-    remember?: boolean;
 };
 
 type LoginResponse = {
@@ -21,13 +20,13 @@ const onFinishFailed: FormProps<LoginRequest>["onFinishFailed"] = (errorInfo) =>
 };
 
 function LoginPage() {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
 
     const onFinish: FormProps<LoginRequest>["onFinish"] = async (values) => {
         try {
             const response = await api.post<LoginResponse>("/api/user/login", values);
 
-            saveToken(response.data.token, values.remember);
+            saveToken(response.data.token);
             navigate("/terminals");
         } catch (error) {
             if (axios.isAxiosError(error) && error.response?.status !== 401 && error.response?.status !== 404) {
@@ -59,13 +58,6 @@ function LoginPage() {
                     name="password"
                 >
                     <Input.Password />
-                </Form.Item>
-
-                <Form.Item<LoginRequest>
-                    name="remember"
-                    valuePropName="checked"
-                >
-                    <Checkbox>Remember me</Checkbox>
                 </Form.Item>
 
                 <Button type="primary" htmlType="submit">

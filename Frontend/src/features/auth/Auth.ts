@@ -1,5 +1,6 @@
 ﻿import {jwtDecode} from "jwt-decode";
 
+
 export function getToken() {
     return localStorage.getItem("token") ?? sessionStorage.getItem("token");
 }
@@ -10,6 +11,7 @@ export function saveToken(token: string) {
 
 export function logout() {
     localStorage.removeItem("token");
+    window.location.href = "/";
 }
 
 export function isAuthenticated() {

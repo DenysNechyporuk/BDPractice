@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LoginPage from "./features/auth/Login/LoginPageModern";
+import LoginPage from "./features/auth/Login/LoginPage";
 import ProtectedRoute from "./ProtectedRoute";
 import TerminalPage from "./features/terminals/TerminalPage";
+
 
 function App() {
     return (

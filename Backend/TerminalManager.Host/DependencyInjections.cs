@@ -7,7 +7,9 @@ using TerminalManager.Features.Configuration;
 using TerminalManagerDB.Data;
 using TerminalManagerDB.Models;
 using HotChocolate.AspNetCore;
+using HotChocolate.CostAnalysis;
 using TerminalManager.Features.Queries.GraphQL;
+using TerminalManager.Features.Queries.NamingConfigs;
 
 
 namespace TerminalManager;
@@ -114,7 +116,11 @@ public static class DependencyInjections
             .AddGraphQLServer()
             .AddQueryType<TerminalQuery>()
             .AddProjections()
-            .AddFiltering()
-            .AddSorting();
+            .AddFiltering<CustomFilteringConvention>()
+            .AddSorting()
+            .ModifyCostOptions(options =>
+            {
+                options.EnforceCostLimits = false;
+            });
     }
 }

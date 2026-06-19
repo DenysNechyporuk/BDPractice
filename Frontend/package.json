@@ -12,6 +12,7 @@
   "dependencies": {
     "@ant-design/icons": "^6.2.5",
     "@ant-design/pro-components": "^2.8.10",
+    "@apollo/client": "^4.2.3",
     "antd": "^5.29.3",
     "axios": "^1.18.0",
     "jwt-decode": "^4.0.0",

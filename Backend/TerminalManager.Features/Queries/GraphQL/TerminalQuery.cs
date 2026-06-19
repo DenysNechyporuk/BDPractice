@@ -1,6 +1,6 @@
-﻿using TerminalManagerDB.Data;
+using TerminalManagerDB.Data;
+using TerminalManagerDB.Enums;
 using TerminalManagerDB.Models;
-
 
 namespace TerminalManager.Features.Queries.GraphQL;
 
@@ -10,8 +10,15 @@ public class TerminalQuery
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<Terminals> GetTerminals([Service] AppDbContext db)
+    public IQueryable<Terminals> GetTerminals([Service] AppDbContext db, Status[]? statuses)
     {
-        return db.Terminals.AsQueryable();
+        var query = db.Terminals.AsQueryable();
+
+        if (statuses is { Length: > 0 })
+        {
+            query = query.Where(terminal => statuses.Contains(terminal.Status));
+        }
+
+        return query;
     }
 }

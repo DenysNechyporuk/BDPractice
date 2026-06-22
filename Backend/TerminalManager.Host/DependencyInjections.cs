@@ -10,6 +10,7 @@ using HotChocolate.AspNetCore;
 using HotChocolate.CostAnalysis;
 using TerminalManager.Features.Queries.GraphQL;
 using TerminalManager.Features.Queries.NamingConfigs;
+using TerminalManagerDB.Interceptors;
 
 
 namespace TerminalManager;
@@ -18,6 +19,8 @@ public static class DependencyInjections
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddSingleton<UpdateTimeAuditableEntitiesInterceptor>();
+
         services.AddDatabase(configuration);
         services.AddCors(options =>
         {
@@ -39,10 +42,18 @@ public static class DependencyInjections
     private static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
     {
         var connection = configuration.GetConnectionString("DefaultConnection");
-        services.AddDbContext<AppDbContext>(options => options.UseSqlite(connection));
-        
+        services.AddDbContext<AppDbContext>((provider, options) =>
+        {
+            var interceptor = provider.GetRequiredService<UpdateTimeAuditableEntitiesInterceptor>();
+
+
+            options
+                .AddInterceptors(interceptor)
+                .UseSqlite(connection);
+        });
     }
-    
+
+
     private static void AddIdentity (this IServiceCollection services)
     {
         services
